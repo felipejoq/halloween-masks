@@ -1,16 +1,14 @@
 ---
-
+import MainLayouts from "../layouts/MainLayouts.astro";
+import {UploadImage} from "../components/uploads/UploadImage";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayouts>
+    <h1 class="text-5xl">🎃 ¡Pruébate una máscara! 🎃</h1>
+    {/* Form to upload an image */}
+    <p class="text-orange-300 text-2xl text-center">
+        👻 Sube una foto donde salga tu rostro y prueba cómo te ves con la colección de máscaras 2024 💀
+    </p>
+    <UploadImage client:load />
+    {/* List of images */}
+</MainLayouts>
