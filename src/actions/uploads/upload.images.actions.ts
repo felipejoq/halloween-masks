@@ -2,7 +2,7 @@ import {defineAction} from "astro:actions";
 import {z} from "astro:schema";
 import {BASE_URL, TOKEN_SECRET} from "astro:env/server";
 import axios from "axios";
-import type {ResponseUpload} from "../../components/uploads/responseUpload.ts";
+import type {ResponseUpload} from "../../components/uploads/ResponseUpload.ts";
 
 const extensionSupported = (file: File) => {
     const ext = file.name.split('.').pop()?.toLowerCase() ?? '';

@@ -1,6 +1,6 @@
 import React, {type ChangeEvent, type FormEvent, useRef, useState} from "react";
 import {actions} from "astro:actions";
-import type {ResponseUpload} from "./responseUpload.ts";
+import type {ResponseUpload} from "./ResponseUpload.ts";
 
 export const UploadImage: React.FC = () => {
 
@@ -40,19 +40,24 @@ export const UploadImage: React.FC = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center">
-                <input
-                    type="file"
-                    name="file"
-                    onChange={handleFile}
-                />
-                <button
-                    className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded"
-                    type="submit"
-                >
-                    Subir y probar
-                </button>
-            </form>
+            {
+                !response && (
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center">
+                        <input
+                            type="file"
+                            name="file"
+                            onChange={handleFile}
+                            className='block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100'
+                        />
+                        <button
+                            className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded"
+                            type="submit"
+                        >
+                            Subir y probar
+                        </button>
+                    </form>
+                )
+            }
             {
                 file && (
                     <>
@@ -60,7 +65,7 @@ export const UploadImage: React.FC = () => {
                         <img
                             src={URL.createObjectURL(file)}
                             alt="Preview"
-                            className="w-1/5"
+                            className="w-4/5 sm:w-1/2 xl:w-1/4"
                         />
                     </>
                 )
@@ -80,7 +85,7 @@ export const UploadImage: React.FC = () => {
                                     key={index}
                                     src={face}
                                     alt="Face"
-                                    className="w-1/6"
+                                    className="w-4/5 sm:w-3/2 xl:w-1/4"
                                 />
                             ))
                         }
