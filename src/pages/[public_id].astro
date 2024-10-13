@@ -3,6 +3,7 @@ import MainLayouts from "../layouts/MainLayouts.astro";
 import GoHome from "../components/shared/GoHome.astro";
 import {actions} from "astro:actions";
 import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
+import Brand from "../components/shared/Brand.astro";
 
 const {public_id = ''} = Astro.params;
 
@@ -33,7 +34,7 @@ const random = Math.floor(Math.random() * 5);
     {
         result && (
                     <>
-                        <div class="text-9xl mt-[50px]">🎃</div>
+                        <Brand />
                         <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
                         <img
                                 src={result.secure_url}

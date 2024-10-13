@@ -1,13 +1,14 @@
 ---
 import MainLayouts from "../layouts/MainLayouts.astro";
 import {UploadImage} from "../components/uploads/UploadImage";
+import Brand from "../components/shared/Brand.astro";
 ---
 
 <MainLayouts>
     {/* Poner en el centro de la pantalla todo el contenido usando tailwind */}
     <div class="h-screen text-center flex flex-col items-center content-center justify-center gap-4">
-        <div class="text-9xl">🎃</div>
-        <h1 class="text-5xl prose text-white font-bold">¡Pruébate una máscara!</h1>
+        <Brand />
+        <h1 class="text-4xl prose text-white font-bold">¡Pruébate una máscara!</h1>
         <p class="text-orange-300 text-2xl text-center prose">
             Sube una foto donde salga tu rostro y prueba cómo te ves con la colección de máscaras 2024.
         </p>
