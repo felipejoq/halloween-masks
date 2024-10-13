@@ -1,5 +1,6 @@
 ---
 import MainLayouts from "../layouts/MainLayouts.astro";
+import GoHome from "../components/shared/GoHome.astro";
 import {actions} from "astro:actions";
 
 const {public_id = ''} = Astro.params;
@@ -31,17 +32,14 @@ const random = Math.floor(Math.random() * 5);
     {
         result && (
             <>
-                <div class="text-9xl mt-5">🎃</div>
+                <div class="text-9xl mt-[50px]">🎃</div>
                 <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
                 <img
                         src={result.secure_url}
                         alt="Preview"
                         class="w-4/5 sm:w-1/2 xl:w-1/4"
                 />
-                {/* Try again return back button css tailwind Halloween */}
-                <a href="/" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded my-3">
-                    🎃 Volver a intentar 🔙
-                </a>
+                <GoHome />
 
                 <h2 class='text-3xl text-white font-bold'>
                     😱 Así te verías 😧
@@ -55,6 +53,7 @@ const random = Math.floor(Math.random() * 5);
                             />
                     ))
                 }
+                <GoHome />
             </>
         )
     }

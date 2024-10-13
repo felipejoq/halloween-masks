@@ -1,0 +1,10 @@
+---
+import ImageHeaderBackground from '../../media/header-bg.webp';
+import {Image} from "astro:assets";
+---
+{/* Position background z-index -10000 */}
+<Image
+    src={ImageHeaderBackground}
+    alt="Halloween Header"
+    class="w-full object-cover z-[-10000] opacity-40 absolute top-0 bottom-[-100px]"
+/>

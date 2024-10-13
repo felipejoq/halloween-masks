@@ -6,10 +6,11 @@ import MainLayouts from "../layouts/MainLayouts.astro";
         title="Sobre mi y el sitio - Hallowen Hackathon"
         description="Este sitio es un proyecto desarrollado por Felipe Jofré Quevedo para la Hackathon propuesta por Midudev y Cloudinary."
 >
-    <a href="/" class="text-6xl my-5 font-bold flex flex-col text-center">
-        <span>🎃</span> Halloween Masks
-    </a>
-    <div class="h-screen flex flex-col justify-center content-center prose">
+    <div class="flex flex-col justify-center content-center prose px-[30px]">
+
+        <a href="/" class="text-6xl my-5 font-bold flex flex-col text-center text-orange-400 no-underline">
+            <span>🎃</span> Halloween Masks
+        </a>
         <h1 class="title-h1">🤔 ¿Qué es este sitio?</h1>
         <p class="paragraph">
             Este sitio es un proyecto de Halloween, donde puedes subir una foto
@@ -52,8 +53,8 @@ import MainLayouts from "../layouts/MainLayouts.astro";
         <p class="paragraph">
             Puedes encontrar el código fuente de este proyecto en los siguientes repositorios:
         </p>
-        <ul>
-            <li>
+        <ul class="">
+            <li class="">
                 <a href="https://github.com/felipejoq/halloween-masks" class="anchor">Frontend</a>
             </li>
             <li>
@@ -75,6 +76,12 @@ import MainLayouts from "../layouts/MainLayouts.astro";
 </MainLayouts>
 
 <style>
+    ul {
+        list-style: none;
+    }
+    li:before {
+        content: "👉 ";
+    }
     .paragraph {
         @apply text-xl text-orange-400 my-2;
     }

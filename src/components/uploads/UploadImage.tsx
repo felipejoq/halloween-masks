@@ -46,15 +46,15 @@ export const UploadImage: React.FC = () => {
     }
 
     return (
-        <>
+        <div className='px-4'>
             {
                 loading ? (<Loader/>) : (
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center justify-center content-center w-full">
                         <input
                             type="file"
                             name="file"
                             onChange={handleFile}
-                            className='block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100'
+                            className='text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100'
                         />
                         <button
                             onClick={handleClickButton}
@@ -68,17 +68,17 @@ export const UploadImage: React.FC = () => {
             }
             {
                 file && (
-                    <>
+                    <div className='flex flex-col items-center justify-center'>
                         <h2 className='my-3 text-3xl'>📸 Tu foto</h2>
                         <img
                             src={URL.createObjectURL(file)}
                             alt="Preview"
                             className="w-4/5 sm:w-1/2 xl:w-1/4"
                         />
-                    </>
+                    </div>
                 )
             }
             <Toaster/>
-        </>
+        </div>
     )
 }
