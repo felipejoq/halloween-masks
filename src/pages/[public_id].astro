@@ -20,7 +20,6 @@ const random = Math.floor(Math.random() * 5);
     description="Si te asustas, no te preocupes, es solo una broma de Halloween 😛"
     social_image={result?.face_masks[random] ?? ''}
 >
-    {/* Show error if having */}
     {
         error && (
                 <div class="text-red-500 text-2xl">
@@ -32,8 +31,8 @@ const random = Math.floor(Math.random() * 5);
     {
         result && (
             <>
-                <h1 class='my-3 text-4xl'>🎭 Máscaras en tu rostro</h1>
-                <h2 class='my-3 text-3xl'>📸 Tu foto</h2>
+                <div class="text-9xl mt-5">🎃</div>
+                <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
                 <img
                         src={result.secure_url}
                         alt="Preview"
@@ -44,7 +43,9 @@ const random = Math.floor(Math.random() * 5);
                     🎃 Volver a intentar 🔙
                 </a>
 
-                <h2 class='text-3xl'>😱 Así te verías 😧</h2>
+                <h2 class='text-3xl text-white font-bold'>
+                    😱 Así te verías 😧
+                </h2>
                 {
                     result.face_masks.map((face: string) => (
                             <img

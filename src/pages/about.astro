@@ -1,0 +1,97 @@
+---
+import MainLayouts from "../layouts/MainLayouts.astro";
+---
+
+<MainLayouts
+        title="Sobre mi y el sitio - Hallowen Hackathon"
+        description="Este sitio es un proyecto desarrollado por Felipe Jofré Quevedo para la Hackathon propuesta por Midudev y Cloudinary."
+>
+    <a href="/" class="text-6xl my-5 font-bold flex flex-col text-center">
+        <span>🎃</span> Halloween Masks
+    </a>
+    <div class="h-screen flex flex-col justify-center content-center prose">
+        <h1 class="title-h1">🤔 ¿Qué es este sitio?</h1>
+        <p class="paragraph">
+            Este sitio es un proyecto de Halloween, donde puedes subir una foto
+            y probar cómo te ves con una colección de máscaras de Halloween.
+        </p>
+        <p class="paragraph">
+            Puedes subir una foto
+            y probar cómo te ves con una colección de máscaras de Halloween.
+        </p>
+        <p class="paragraph">
+            Este es parte de un desafío de la Hackathon Halloween propuesta por
+            <a href="https://midu.dev/" class="anchor">Midudev</a>
+            y el equipo de <a href="https://cloudinary.com/" class="anchor">Cloudinary</a>
+        </p>
+
+        <h2 class="title-h2">
+            ⚙️ ¿Cómo funciona?
+        </h2>
+        <p class="paragraph-2">
+            Backend: Desarrollado en Node.js + Express principalmente.
+        </p>
+        <p class="paragraph">Sirve para manejar las peticiones desde el Frontend autenticando al cliente y subiendo las
+            imágenes a
+            Cloudinary para que sean procesadas, allí se transforman, se detectan los rostros y se le añade
+            un overlay sobre la posición detectada del rostro</p>
+        <p class="paragraph-2">
+            Frontend: Desarrollado en Astro.
+        </p>
+        <p class="paragraph">
+            Sirve para que el usuario pueda elegir una imagen desde su dispositivo y enviarla al servidor para que esta
+            sea procesada y luego exhibida al usuario para que vea el resultado.
+        </p>
+        <p class="paragraph">
+            Además ayuda a compartir este en redes sociales, generando una página con metadatos para que se vea
+            correctamente en las redes sociales promoviendo así algo de "viralidad" en la aplicación.
+        </p>
+        <h2 class="title-h2">
+            🚀 Código fuente
+        </h2>
+        <p class="paragraph">
+            Puedes encontrar el código fuente de este proyecto en los siguientes repositorios:
+        </p>
+        <ul>
+            <li>
+                <a href="https://github.com/felipejoq/halloween-masks" class="anchor">Frontend</a>
+            </li>
+            <li>
+                <a href="https://github.com/felipejoq/halloween-mask-cloudinary" class="anchor">Backend</a>
+            </li>
+        </ul>
+
+        <h2 class="title-h2">
+            👨‍💻 ¿Quién soy?
+        </h2>
+        <p class="paragraph">
+            Hola! 👋 soy Felipe, un desarrollador web, me gusta aprender cosas nuevas y compartir lo que aprendo.
+            Además de adquirir desafíos que me ayuden a crecer como profesional.
+        </p>
+        <p class="paragraph">
+            Puedes encontrarme en mi <a href="https://uncodigo.com/" class="anchor">sitio web</a> 👈 😉
+        </p>
+    </div>
+</MainLayouts>
+
+<style>
+    .paragraph {
+        @apply text-xl text-orange-400 my-2;
+    }
+
+    .title-h1 {
+        @apply text-white text-4xl font-bold  mt-10 mb-2;
+    }
+
+    .title-h2 {
+        @apply text-white text-3xl font-bold mt-10 mb-2;
+    }
+
+    .paragraph-2 {
+        @apply text-white text-2xl mt-2 mb-4;
+    }
+
+    .anchor {
+        @apply text-white underline;
+    }
+</style>

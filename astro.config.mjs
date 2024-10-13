@@ -12,6 +12,9 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'server',
   adapter: netlify(),
+  devToolbar: {
+    enabled: false
+  },
   experimental: {
     env: {
       schema: {
