@@ -15,6 +15,10 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
+  image: {
+    domains: ['res.cloudinary.com'],
+    remotePatterns: [{protocol: "https"}]
+  },
   experimental: {
     env: {
       schema: {

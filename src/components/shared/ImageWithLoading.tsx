@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const ImageWithLoading: React.FC<{ src: string; }> = ({ src }) => {
+export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = ({ src, aspectRatio }) => {
     const [loading, setLoading] = useState(true);
     const [retryCount, setRetryCount] = useState(0);
 
@@ -10,7 +10,7 @@ export const ImageWithLoading: React.FC<{ src: string; }> = ({ src }) => {
     };
 
     return (
-        <div className="w-4/5 sm:w-3/2 xl:w-2/5 flex justify-center relative" style={{ aspectRatio: '3 / 2' }}>
+        <div className="w-4/5 sm:w-3/2 xl:w-2/5 flex justify-center relative" style={{ aspectRatio }}>
             {loading && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
                     <div className="animate-pulse text-4xl">🎃</div>
