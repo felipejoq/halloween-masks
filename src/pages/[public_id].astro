@@ -4,6 +4,7 @@ import GoHome from "../components/shared/GoHome.astro";
 import {actions} from "astro:actions";
 import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
 import Brand from "../components/shared/Brand.astro";
+import {ImageWithLoading} from "../components/shared/ImageWithLoading.tsx";
 
 const {public_id = ''} = Astro.params;
 
@@ -34,7 +35,7 @@ const random = Math.floor(Math.random() * 5);
     {
         result && (
                     <>
-                        <Brand />
+                        <Brand/>
                         <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
                         <img
                                 src={result.secure_url}
@@ -42,23 +43,22 @@ const random = Math.floor(Math.random() * 5);
                                 class="w-4/5 sm:w-1/2 xl:w-1/4"
                         />
 
-                        <SocialShareButtons />
+                        <SocialShareButtons/>
 
                         <GoHome/>
 
                         <h2 class='text-3xl text-white font-bold'>
                             😱 Así te verías 😧
                         </h2>
-                        {
-                            result.face_masks.map((face: string) => (
-                                    <img
-                                            src={face}
-                                            alt="Face"
-                                            class="w-4/5 sm:w-3/2 xl:w-1/4"
-                                    />
-                            ))
-                        }
-                        <SocialShareButtons />
+                        <div class="flex flex-col items-center justify-center w-full gap-5">
+
+                            {
+                                result.face_masks.map((face: string) => (
+                                        <ImageWithLoading src={face} client:only="react"/>
+                                ))
+                            }
+                        </div>
+                        <SocialShareButtons/>
                         <GoHome/>
                     </>
         )
