@@ -2,6 +2,7 @@
 import MainLayouts from "../layouts/MainLayouts.astro";
 import GoHome from "../components/shared/GoHome.astro";
 import {actions} from "astro:actions";
+import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
 
 const {public_id = ''} = Astro.params;
 
@@ -17,44 +18,48 @@ const {result} = data ?? {};
 const random = Math.floor(Math.random() * 5);
 ---
 <MainLayouts
-    title="¿Qué tal me quedan las máscaras? 🎃 - boooooo"
-    description="Si te asustas, no te preocupes, es solo una broma de Halloween 😛"
-    social_image={result?.face_masks[random] ?? ''}
+        title="¿Qué tal me quedan las máscaras? 🎃 - boooooo"
+        description="Si te asustas, no te preocupes, es solo una broma de Halloween 😛"
+        social_image={result?.face_masks[random] ?? ''}
 >
     {
         error && (
-                <div class="text-red-500 text-2xl">
-                    {error}
-                    {JSON.stringify(error)}
-                </div>
+                    <div class="text-red-500 text-2xl">
+                        {error}
+                        {JSON.stringify(error)}
+                    </div>
         )
     }
     {
         result && (
-            <>
-                <div class="text-9xl mt-[50px]">🎃</div>
-                <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
-                <img
-                        src={result.secure_url}
-                        alt="Preview"
-                        class="w-4/5 sm:w-1/2 xl:w-1/4"
-                />
-                <GoHome />
+                    <>
+                        <div class="text-9xl mt-[50px]">🎃</div>
+                        <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
+                        <img
+                                src={result.secure_url}
+                                alt="Preview"
+                                class="w-4/5 sm:w-1/2 xl:w-1/4"
+                        />
 
-                <h2 class='text-3xl text-white font-bold'>
-                    😱 Así te verías 😧
-                </h2>
-                {
-                    result.face_masks.map((face: string) => (
-                            <img
-                                    src={face}
-                                    alt="Face"
-                                    class="w-4/5 sm:w-3/2 xl:w-1/4"
-                            />
-                    ))
-                }
-                <GoHome />
-            </>
+                        <SocialShareButtons />
+
+                        <GoHome/>
+
+                        <h2 class='text-3xl text-white font-bold'>
+                            😱 Así te verías 😧
+                        </h2>
+                        {
+                            result.face_masks.map((face: string) => (
+                                    <img
+                                            src={face}
+                                            alt="Face"
+                                            class="w-4/5 sm:w-3/2 xl:w-1/4"
+                                    />
+                            ))
+                        }
+                        <SocialShareButtons />
+                        <GoHome/>
+                    </>
         )
     }
 </MainLayouts>
