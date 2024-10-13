@@ -36,6 +36,10 @@ export const UploadImage: React.FC = () => {
             setError(error);
         }
         setResponse(data?.result);
+
+        if(data?.result) {
+            window.location.href = `/${data.result.public_id}`;
+        }
     }
 
     return (

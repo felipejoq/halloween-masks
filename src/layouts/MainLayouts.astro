@@ -3,23 +3,28 @@
 interface Props {
     title?: string;
     description?: string;
+    social_image?: string;
 }
 
 const {
     title = 'Halloween Masks',
     description = 'The best Halloween masks in the world',
+    social_image = 'https://res.cloudinary.com/dzwgql0ie/image/upload/v1728829494/bg_m67jfa.webp'
 } = Astro.props;
 
 ---
 
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <title>Astro</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={social_image} />
+    <title>{title}</title>
 </head>
 <body class="bg-black-500 text-orange-500 py-3 px-4">
     <div class="flex flex-col items-center gap-3 text-center">

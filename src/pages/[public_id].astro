@@ -1,0 +1,60 @@
+---
+import MainLayouts from "../layouts/MainLayouts.astro";
+import {actions} from "astro:actions";
+
+const {public_id = ''} = Astro.params;
+
+const {data, error} = await actions.getPostByPublicId(public_id);
+
+if (error) {
+    if (error.code === 'INTERNAL_SERVER_ERROR') return Astro.redirect("/500");
+    if (error.code === 'NOT_FOUND') return Astro.redirect("/404");
+}
+
+const {result} = data ?? {};
+// random del 0 al 4
+const random = Math.floor(Math.random() * 5);
+---
+<MainLayouts
+    title="¿Qué tal me quedan las máscaras? 🎃 - boooooo"
+    description="Si te asustas, no te preocupes, es solo una broma de Halloween 😛"
+    social_image={result?.face_masks[random] ?? ''}
+>
+    {/* Show error if having */}
+    {
+        error && (
+                <div class="text-red-500 text-2xl">
+                    {error}
+                    {JSON.stringify(error)}
+                </div>
+        )
+    }
+    {
+        result && (
+            <>
+                <h1 class='my-3 text-4xl'>🎭 Máscaras en tu rostro</h1>
+                <h2 class='my-3 text-3xl'>📸 Tu foto</h2>
+                <img
+                        src={result.secure_url}
+                        alt="Preview"
+                        class="w-4/5 sm:w-1/2 xl:w-1/4"
+                />
+                {/* Try again return back button css tailwind Halloween */}
+                <a href="/" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded my-3">
+                    🎃 Volver a intentar 🔙
+                </a>
+
+                <h2 class='text-3xl'>😱 Así te verías 😧</h2>
+                {
+                    result.face_masks.map((face: string) => (
+                            <img
+                                    src={face}
+                                    alt="Face"
+                                    class="w-4/5 sm:w-3/2 xl:w-1/4"
+                            />
+                    ))
+                }
+            </>
+        )
+    }
+</MainLayouts>
