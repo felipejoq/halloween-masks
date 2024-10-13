@@ -2,6 +2,8 @@
 
 Proyecto para la "Hackathon Halloween" organizada por Midudev y Cloudinary. La consigna del proyecto es usar los servicios de Cloudinary para generar una aplicación con temática "Halloween 🎃".
 
+> 🚀 Demo: [Halloween Masks](https://halloween.uncodigo.com/)
+
 ℹ️ Proyecto Backend [Repositorio](https://github.com/felipejoq/halloween-mask-cloudinary)
 
 La aplicación permite subir una imagen y probarse una máscara de terror. ¿Quién da más miedo, mi código o las máscaras? 😂
