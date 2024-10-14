@@ -5,7 +5,7 @@ export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = 
     const [retryCount, setRetryCount] = useState(0);
 
     const handleRetry = () => {
-        if( retryCount < 3 ) {
+        if( retryCount < 10 ) {
             setLoading(true);
             setRetryCount(retryCount + 1);
         }
