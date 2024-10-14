@@ -19,11 +19,13 @@ export const uploadImages = defineAction({
             .refine(extensionSupported, {
                 message: 'File extension not supported',
             }),
+        change_bg: z.boolean().optional()
     }),
-    handler: async ({file}) => {
+    handler: async ({file, change_bg}) => {
 
         const formData = new FormData();
         formData.append('file', file);
+        formData.append('change_bg', change_bg ? 'true' : '');
 
         const response = await axios
             .post<ResponseUpload>(`${BASE_URL}/upload`, formData, {

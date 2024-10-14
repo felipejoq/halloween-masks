@@ -5,6 +5,7 @@ import {actions} from "astro:actions";
 import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
 import Brand from "../components/shared/Brand.astro";
 import {ImageWithLoading} from "../components/shared/ImageWithLoading.tsx";
+import {getImage} from "astro:assets";
 
 const {public_id = ''} = Astro.params;
 
@@ -16,6 +17,14 @@ if (error) {
 }
 
 const {result} = data ?? {};
+
+const originalImage = await getImage({
+    src: result?.secure_url ?? '',
+    quality: 80,
+    format: 'webp',
+    inferSize: true,
+});
+const aspectRatio = `${originalImage?.options.width} / ${originalImage?.options.height}`;
 // random del 0 al 4
 const random = Math.floor(Math.random() * 5);
 ---
@@ -54,7 +63,7 @@ const random = Math.floor(Math.random() * 5);
 
                             {
                                 result.face_masks.map((face: string) => (
-                                        <ImageWithLoading src={face} client:only="react"/>
+                                        <ImageWithLoading src={face} aspectRatio={aspectRatio} client:only="react"/>
                                 ))
                             }
                         </div>
