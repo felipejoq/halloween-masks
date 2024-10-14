@@ -66,6 +66,10 @@ const random = Math.floor(Math.random() * 5);
                                         <ImageWithLoading src={face} aspectRatio={aspectRatio} client:only="react"/>
                                 ))
                             }
+                            {/* Info: limitado a 1 imagen por cuota gratuita */}
+                            <div class="text-white text-center bg-orange-600 rounded py-3 px-5">
+                                <p>👻 <span class="font-bold">Info:</span> limitado a un resultado para optimizar recursos de generación de imágenes.</p>
+                            </div>
                         </div>
                         <SocialShareButtons/>
                         <GoHome/>
