@@ -1,6 +1,7 @@
 import { ImageWithLoading } from "./ImageWithLoading.tsx";
 import React, { useState } from "react";
 import { downloadImage } from "../../config/utils.ts";
+import {toast, Toaster} from "sonner";
 
 export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> = ({ faceMasks, aspectRatio }) => {
     const [showModal, setShowModal] = useState(false);
@@ -21,7 +22,13 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
     const handleDownload = async (e: React.MouseEvent, src: string) => {
         e.stopPropagation();
         setIsDownloading(true);
-        await downloadImage(src);
+        //await downloadImage(src);
+        toast.promise(downloadImage(src), {
+            loading: "Descargando imagen tenebrosa... 👻",
+            success: "Descarga exitosa! 🎃",
+            error: "Error al descargar la imagen ❌",
+            position: "top-right",
+        })
         setIsDownloading(false);
     };
 
@@ -70,6 +77,7 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                     </button>
                 </div>
             )}
+            <Toaster />
         </>
     );
 };

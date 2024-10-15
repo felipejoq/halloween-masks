@@ -6,18 +6,18 @@ import type {ResponseUpload} from "../../components/uploads/ResponseUpload.ts";
 
 const extensionSupported = (file: File) => {
     const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
-    return ['png', 'jpg', 'jpeg', 'gif'].includes(ext);
+    return ['png', 'jpg', 'jpeg'].includes(ext);
 }
 
 export const uploadImages = defineAction({
     accept: 'form',
     input: z.object({
         file: z.instanceof(File)
-            .refine((file) => file.size < 5 * 1024 * 1024, {
-                message: 'File size accepted is 5MB',
+            .refine((file) => file.size < 2 * 1024 * 1024, {
+                message: 'La imagen debe pesar máximo 2MB',
             })
             .refine(extensionSupported, {
-                message: 'File extension not supported',
+                message: 'Las extensiones permitidas son: png, jpg, jpeg',
             }),
         change_bg: z.boolean().optional()
     }),
