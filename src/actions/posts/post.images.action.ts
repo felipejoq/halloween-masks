@@ -2,7 +2,6 @@ import {defineAction, ActionError} from "astro:actions";
 import {z} from "astro:schema";
 import axios from "axios";
 import type {ResponseUpload} from "../../components/uploads/ResponseUpload.ts";
-import {BASE_URL, TOKEN_SECRET} from "astro:env/server";
 
 export const getPostByPublicId = defineAction({
     accept: 'json',
@@ -13,10 +12,10 @@ export const getPostByPublicId = defineAction({
 
         try {
             response = await axios
-                .get<ResponseUpload>(`${BASE_URL}/post-images/${public_id}`, {
+                .get<ResponseUpload>(`${import.meta.env.BASE_URL}/post-images/${public_id}`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${TOKEN_SECRET}`
+                        'Authorization': `Bearer ${import.meta.env.TOKEN_SECRET}`
                     }
                 });
         } catch (error) {

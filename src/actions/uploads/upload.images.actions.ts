@@ -1,6 +1,5 @@
 import {defineAction} from "astro:actions";
 import {z} from "astro:schema";
-import {BASE_URL, TOKEN_SECRET} from "astro:env/server";
 import axios from "axios";
 import type {ResponseUpload} from "../../components/uploads/ResponseUpload.ts";
 
@@ -28,10 +27,10 @@ export const uploadImages = defineAction({
         formData.append('change_bg', change_bg ? 'true' : '');
 
         const response = await axios
-            .post<ResponseUpload>(`${BASE_URL}/upload`, formData, {
+            .post<ResponseUpload>(`${import.meta.env.BASE_URL}/upload`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${TOKEN_SECRET}`
+                'Authorization': `Bearer ${import.meta.env.TOKEN_SECRET}`
             }
         });
 
