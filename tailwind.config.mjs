@@ -3,6 +3,9 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
+			animation:{
+				'spin-slow': 'spin 1s linear infinite 1s',
+			},
 			/*Halloween theme*/
 			colors: {
 				'orange-50': '#FFFAF0',
