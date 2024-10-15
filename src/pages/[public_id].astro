@@ -27,6 +27,8 @@ const originalImage = await getImage({
 const aspectRatio = `${originalImage?.options.width} / ${originalImage?.options.height}`;
 // random del 0 al 4
 const random = Math.floor(Math.random() * 5);
+
+export const prerender = true;
 ---
 <MainLayouts
         title="¿Qué tal me quedan las máscaras? 🎃 - boooooo"
