@@ -4,7 +4,7 @@ import GoHome from "../components/shared/GoHome.astro";
 import {actions} from "astro:actions";
 import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
 import Brand from "../components/shared/Brand.astro";
-import {ImageWithLoading} from "../components/shared/ImageWithLoading.tsx";
+import {GenGallery} from "../components/shared/GenGallery";
 import {getImage} from "astro:assets";
 
 const {public_id = ''} = Astro.params;
@@ -33,6 +33,8 @@ const random = Math.floor(Math.random() * 5);
         description="Si te asustas, no te preocupes, es solo una broma de Halloween 😛"
         social_image={result?.face_masks[random] ?? ''}
 >
+    <Brand/>
+    <SocialShareButtons/>
     {
         error && (
                     <div class="text-red-500 text-2xl">
@@ -43,37 +45,30 @@ const random = Math.floor(Math.random() * 5);
     }
     {
         result && (
-                    <>
-                        <Brand/>
-                        <h2 class='my-3 text-3xl text-white font-bold'>📸 Tu foto</h2>
-                        <img
-                                src={result.secure_url}
-                                alt="Preview"
-                                class="w-4/5 sm:w-1/2 xl:w-1/4"
-                        />
-
-                        <SocialShareButtons/>
-
-                        <GoHome/>
-
-                        <h2 class='text-3xl text-white font-bold'>
-                            😱 Así te verías 😧
-                        </h2>
-                        <div class="flex flex-col items-center justify-center w-full gap-5">
-
-                            {
-                                result.face_masks.map((face: string) => (
-                                        <ImageWithLoading src={face} aspectRatio={aspectRatio} client:only="react"/>
-                                ))
-                            }
-                            {/* Info: limitado a 1 imagen por cuota gratuita*/}
-                            <div class="w-4/5 sm:w-3/2 xl:w-2/5 text-gray-400 text-center">
-                                <p>👻 Limitado a dos resultados para optimizar recursos de generación de imágenes.</p>
-                            </div>
+                    <div class="flex flex-col xl:flex-row gap-5 my-6 mx-4">
+                        <div class="w-full xl:w-1/2 flex flex-col items-center">
+                            <h2 class='my-3 text-2xl text-white font-bold'>📸 Tu foto</h2>
+                            <img
+                                    src={result.secure_url}
+                                    alt="Preview"
+                                    class="w-full sm:max-w-[500px] rounded-lg shadow-lg"
+                            />
                         </div>
-                        <SocialShareButtons/>
-                        <GoHome/>
-                    </>
+
+                        <div class="w-full xl:w-1/2">
+                            <h2 class='my-3 text-2xl text-white font-bold'>
+                                😱 Así te verías 😧
+                            </h2>
+                            <GenGallery faceMasks={result.face_masks} aspectRatio={aspectRatio} client:only="react"/>
+                        </div>
+                    </div>
         )
     }
+    {/* Info: limitado a 1 imagen por cuota gratuita
+    <div class="w-full text-gray-400 text-center my-4">
+        <p>👻 Limitado a dos resultados para optimizar recursos de generación de imágenes.</p>
+    </div>*/}
+    <div class="flex justify-center">
+        <GoHome/>
+    </div>
 </MainLayouts>
