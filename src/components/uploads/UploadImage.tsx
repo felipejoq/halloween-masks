@@ -2,6 +2,7 @@ import React, {type ChangeEvent, type FormEvent, useState} from "react";
 import {actions, isInputError} from "astro:actions";
 import {Loader} from "../shared/Loader.tsx";
 import {Toaster, toast} from "sonner";
+import {navigate} from "astro:transitions/client";
 
 export const UploadImage: React.FC = () => {
 
@@ -32,6 +33,17 @@ export const UploadImage: React.FC = () => {
             return;
         }
 
+        // show toast when no file extension is jpg, jpeg or png
+        const allowedExtensions = ['image/jpg', 'image/jpeg', 'image/png'];
+        if (!allowedExtensions.includes(file.type)) {
+            toast.info('El archivo debe ser .jpg, .jpeg o .png', {
+                position: 'top-center',
+                icon: '🎃'
+            });
+            setLoading(false);
+            return;
+        }
+
         setLoading(true);
 
         // form data
@@ -44,11 +56,18 @@ export const UploadImage: React.FC = () => {
 
         if (data?.result) {
             setLoading(false);
-            window.location.href = `/${data.result.public_id}`;
+            await navigate(`/${data.result.public_id}`);
+            // window.location.href = `/${data.result.public_id}`;
         } else if (isInputError(error)) {
             setLoading(false);
             const errorMessage = error.fields?.file?.join(', ') ?? 'Unknown error';
             toast.info(`${errorMessage}`, {
+                position: 'top-center',
+                icon: '🎃'
+            });
+        } else {
+            setLoading(false);
+            toast.info('Ha ocurrido un error inesperado', {
                 position: 'top-center',
                 icon: '🎃'
             });
