@@ -23,9 +23,9 @@ export const UploadImage: React.FC = () => {
             return;
         }
 
-        // show toast when file exceds 2MB
-        if (file.size > 2 * 1024 * 1024) {
-            toast.info('El archivo no debe exceder los 2MB', {
+        // show toast when file exceeds 2MB
+        if (file.size > 5 * 1024 * 1024) {
+            toast.info('El archivo no debe exceder los 5MB', {
                 position: 'top-center',
                 icon: '🎃'
             });
