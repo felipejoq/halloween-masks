@@ -62,7 +62,7 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                                 {isDownloading ? (
                                     <span className="animate-spin-slow">⏳</span>
                                 ) : (
-                                    <span>⬇</span>
+                                    <span className='cursor-pointer'>⬇</span>
                                 )}
                                 ️Descargar
                             </div>

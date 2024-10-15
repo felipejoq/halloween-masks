@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { downloadImage } from "../../config/utils.ts";
+import {toast} from "sonner";
 
 export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = ({ src, aspectRatio }) => {
     const [loading, setLoading] = useState(true);
@@ -21,16 +22,21 @@ export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = 
     const handleDownload = async (e: React.MouseEvent, src: string) => {
         e.stopPropagation();
         setIsDownloading(true);
-        await downloadImage(src);
+        toast.promise(downloadImage(src), {
+            loading: "Descargando imagen tenebrosa... 👻",
+            success: "Descarga exitosa! 🎃",
+            error: "Error al descargar la imagen ❌",
+            position: "top-right",
+        })
         setIsDownloading(false);
     };
 
     return (
         <div className="relative" style={{ aspectRatio }}>
             {loading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black">
                     <div className="animate-pulse text-4xl">🎃</div>
-                    <div className="text-white text-3xl">Loading...</div>
+                    <div className="text-white text-sm">Loading...</div>
                 </div>
             )}
             <img
@@ -52,7 +58,7 @@ export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = 
                         isDownloading ? (
                             <span className='animate-spin-slow'>⏳</span>
                         ) : (
-                            <span>⬇</span>
+                            <span className='cursor-pointer'>⬇</span>
                         )
                     }
                 </div>
