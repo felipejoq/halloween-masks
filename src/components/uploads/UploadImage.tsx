@@ -1,5 +1,5 @@
 import React, {type ChangeEvent, type FormEvent, useState} from "react";
-import {actions} from "astro:actions";
+import {actions, isInputError} from "astro:actions";
 import {Loader} from "../shared/Loader.tsx";
 import {Toaster, toast} from "sonner";
 
@@ -30,10 +30,18 @@ export const UploadImage: React.FC = () => {
         formData.append('change_bg', changeBg.toString());
 
         // send to server
-        const {data} = await actions.uploadImages(formData);
+        const {data, error} = await actions.uploadImages(formData);
 
         if (data?.result) {
+            setLoading(false);
             window.location.href = `/${data.result.public_id}`;
+        } else if (isInputError(error)) {
+            setLoading(false);
+            const errorMessage = error.fields?.file?.join(', ') ?? 'Unknown error';
+            toast.info(`${errorMessage}`, {
+                position: 'top-center',
+                icon: '🎃'
+            });
         }
     }
 
