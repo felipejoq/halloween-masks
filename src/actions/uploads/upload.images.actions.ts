@@ -13,7 +13,7 @@ export const uploadImages = defineAction({
     accept: 'form',
     input: z.object({
         file: z.instanceof(File)
-            .refine((file) => file.size < 10 * 1024 * 1024, {
+            .refine((file) => file.size < 2 * 1024 * 1024, {
                 message: 'La imagen debe pesar máximo 10MB',
             })
             .refine(extensionSupported, {
