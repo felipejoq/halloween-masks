@@ -3,6 +3,7 @@ import {actions, isInputError} from "astro:actions";
 import {Loader} from "../shared/Loader.tsx";
 import {Toaster, toast} from "sonner";
 import {navigate} from "astro:transitions/client";
+import {type Mask, masks} from "../../config/utils.ts";
 
 export const UploadImage: React.FC = () => {
 
@@ -55,9 +56,9 @@ export const UploadImage: React.FC = () => {
         const {data, error} = await actions.uploadImages(formData);
 
         if (data?.result) {
-            setLoading(false);
-            await navigate(`/${data.result.public_id}`);
-            // window.location.href = `/${data.result.public_id}`;
+            //await navigate(`/${data.result.public_id}`);
+            window.location.href = `/${data.result.public_id}`;
+            //setLoading(false);
         } else if (isInputError(error)) {
             setLoading(false);
             const errorMessage = error.fields?.file?.join(', ') ?? 'Unknown error';
@@ -103,8 +104,9 @@ export const UploadImage: React.FC = () => {
                         <label htmlFor='change_bg'
                                className='text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-center gap-2'>
                             <div className='flex gap-5 text-orange-500 font-semibold text-2xl'>
-                                Marca para agregar un fondo "Terrorífico"</div>
-                                <span className='hidden sm:block text-[30px]'>😏👉</span>
+                                Marca para agregar un fondo "Terrorífico"
+                            </div>
+                            <span className='hidden sm:block text-[30px]'>😏👉</span>
                             <div className='flex justify-center'>
                                 <input
                                     checked={changeBg}
@@ -116,6 +118,30 @@ export const UploadImage: React.FC = () => {
                                 /> <span className='block sm:hidden text-[30px]'>👈😏</span>
                             </div>
                         </label>
+
+                        <div className='flex flex-col items-center justify-center gap-4 mb-4'>
+                            <div className='flex justify-center'>
+                                {
+                                    masks.map((mask, index) => (
+                                        <label htmlFor='masks' key={index} className='flex gap-2 text-orange-500'>
+                                            <input
+                                                type='checkbox'
+                                                name='masks'
+                                                hidden={true}
+                                                id={mask.public_id}
+                                                value={mask.public_id}
+                                                className='mr-2 text-orange-500 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 focus:ring-2'
+                                            />
+                                            <img
+                                                src={mask.src}
+                                                alt={mask.public_id}
+                                                className='w-20 max-h-20 cursor-pointer object-contain'
+                                            />
+                                        </label>
+                                    ))
+                                }
+                            </div>
+                        </div>
 
                         <button
                             onClick={handleClickButton}
@@ -129,8 +155,8 @@ export const UploadImage: React.FC = () => {
             }
             {
                 file && (
-                    <div className='flex flex-col items-center justify-center'>
-                        <h2 className='my-3 text-3xl'>📸 Tu foto</h2>
+                    <div className=' flex flex-col items-center justify-center'>
+                        <h2 className=' my-3 text-3xl'>📸 Tu foto</h2>
                         <img
                             src={URL.createObjectURL(file)}
                             alt="Preview"
