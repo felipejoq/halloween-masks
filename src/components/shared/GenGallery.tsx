@@ -1,8 +1,8 @@
 import { ImageWithLoading } from "./ImageWithLoading.tsx";
 import React, { useState } from "react";
-import { downloadImage } from "../../config/utils.ts";
+import { downloadImage } from "@config/utils.ts";
 import {toast, Toaster} from "sonner";
-import ImageLoadError from "../../media/load-error.webp";
+import ImageLoadError from "@media/load-error.webp";
 
 export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> = ({ faceMasks, aspectRatio }) => {
     const [showModal, setShowModal] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { downloadImage } from "../../config/utils.ts";
+import { downloadImage } from "@config/utils.ts";
 import {toast} from "sonner";
-import ImageLoadError from "../../media/load-error.webp";
+import ImageLoadError from "@media/load-error.webp";
 
 export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = ({ src, aspectRatio }) => {
     const [loading, setLoading] = useState(true);

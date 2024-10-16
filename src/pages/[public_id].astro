@@ -1,10 +1,10 @@
 ---
-import MainLayouts from "../layouts/MainLayouts.astro";
-import GoHome from "../components/shared/GoHome.astro";
+import MainLayouts from "@layouts/MainLayouts.astro";
+import GoHome from "@components/shared/GoHome.astro";
 import {actions} from "astro:actions";
-import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
-import Brand from "../components/shared/Brand.astro";
-import {GenGallery} from "../components/shared/GenGallery";
+import SocialShareButtons from "@components/shared/SocialShareButtons.astro";
+import Brand from "@components/shared/Brand.astro";
+import {GenGallery} from "@components/shared/GenGallery";
 import {getImage} from "astro:assets";
 
 const {public_id = ''} = Astro.params;

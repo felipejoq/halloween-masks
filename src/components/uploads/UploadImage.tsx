@@ -1,9 +1,8 @@
 import React, {type ChangeEvent, type FormEvent, useState} from "react";
 import {actions, isInputError} from "astro:actions";
-import {Loader} from "../shared/Loader.tsx";
+import {Loader} from "@components/shared/Loader.tsx";
 import {Toaster, toast} from "sonner";
-import {navigate} from "astro:transitions/client";
-import {type Mask, masks} from "../../config/utils.ts";
+import {type Mask, masks} from "@config/utils.ts";
 
 export const UploadImage: React.FC = () => {
 
