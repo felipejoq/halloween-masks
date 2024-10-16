@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { downloadImage } from "../../config/utils.ts";
 import {toast} from "sonner";
+import ImageLoadError from "../../media/load-error.webp";
 
 export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = ({ src, aspectRatio }) => {
     const [loading, setLoading] = useState(true);
+    const [loadingText, setLoadingText] = useState('Loading...');
     const [retryCount, setRetryCount] = useState(0);
     const [isDownloading, setIsDownloading] = useState(false);
 
@@ -34,9 +36,9 @@ export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = 
     return (
         <div className="relative" style={{ aspectRatio }}>
             {loading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
                     <div className="animate-pulse text-4xl">🎃</div>
-                    <div className="text-white text-sm">Loading...</div>
+                    <div className="text-white text-sm">{loadingText}</div>
                 </div>
             )}
             <img
@@ -45,7 +47,12 @@ export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = 
                 className="grayscale-[75] w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl hover:cursor-pointer hover:saturate-200 hover:grayscale-0 transition duration-300"
                 loading="lazy"
                 onLoad={() => setLoading(false)}
-                onError={handleRetry}
+                onError={(e) => {
+                    (e.target as HTMLImageElement).src = ImageLoadError.src;
+                    setLoading(false);
+                    setLoadingText('Hubo un error... reintentando 😱');
+                    handleRetry();
+                }}
             />
             {/* Download image button */}
             <button

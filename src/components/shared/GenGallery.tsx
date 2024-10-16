@@ -2,6 +2,7 @@ import { ImageWithLoading } from "./ImageWithLoading.tsx";
 import React, { useState } from "react";
 import { downloadImage } from "../../config/utils.ts";
 import {toast, Toaster} from "sonner";
+import ImageLoadError from "../../media/load-error.webp";
 
 export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> = ({ faceMasks, aspectRatio }) => {
     const [showModal, setShowModal] = useState(false);
@@ -51,21 +52,22 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                             src={selectedImage}
                             alt="Halloween masks resultado"
                             className="w-full max-w-lg h-auto object-contain rounded-lg shadow-lg"
+                            onError={(e) => {
+                                (e.target as HTMLImageElement).src = ImageLoadError.src;
+                            }}
                         />
                         {/* Download image button */}
                         <button
                             onClick={(e) => handleDownload(e, selectedImage)}
-                            className="mt-4 text-center text-orange-300 bg-white hover:bg-orange-400 hover:text-white font-bold py-2 px-4 rounded"
+                            className="mt-4 flex justify-center gap-3 text-sm text-orange-300 bg-white hover:bg-orange-400 hover:text-white font-bold py-2 px-4 rounded"
                             title="Download image"
                         >
-                            <div className="text-sm flex justify-center gap-3">
                                 {isDownloading ? (
                                     <span className="animate-spin-slow">⏳</span>
                                 ) : (
                                     <span className='cursor-pointer'>⬇</span>
                                 )}
                                 ️Descargar
-                            </div>
                         </button>
                     </div>
                     {/* Close button */}

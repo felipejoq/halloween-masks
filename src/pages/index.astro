@@ -12,6 +12,6 @@ import Brand from "../components/shared/Brand.astro";
         <p class="text-orange-300 text-2xl text-center prose">
             Sube una foto donde salga tu rostro y prueba cómo te ves con la colección de máscaras 2024.
         </p>
-        <UploadImage client:load />
+        <UploadImage client:only="react" />
     </div>
 </MainLayouts>
