@@ -6,6 +6,14 @@ import {masks} from "@config/utils.ts";
 
 const allowedExtensions = ['image/jpg', 'image/jpeg', 'image/png'];
 
+const checkExtensions = (file: File) => {
+    return !allowedExtensions.includes(file.type);
+}
+
+const checkFileSize = (file: File) => {
+    return file.size > 5 * 1024 * 1024;
+}
+
 export const UploadImage: React.FC = () => {
     const [file, setFile] = useState<File>();
     const [changeBg, setChangeBg] = useState<boolean>(false);
@@ -15,11 +23,18 @@ export const UploadImage: React.FC = () => {
         const files = e.target.files;
 
         if (files) {
-            if (!allowedExtensions.includes(files[0].type)) {
-                toast.info('El archivo debe ser .jpg, .jpeg o .png', {
-                    position: 'top-center',
-                    icon: '🎃'
-                });
+            if (checkFileSize(files[0]) || checkExtensions(files[0])) {
+                if (checkExtensions(files[0])) {
+                    toast.info('El archivo debe ser .jpg, .jpeg o .png', {
+                        position: 'top-center',
+                        icon: '🎃'
+                    });
+                } else {
+                    toast.info('El archivo no debe exceder los 5MB', {
+                        position: 'top-center',
+                        icon: '🎃'
+                    });
+                }
                 setLoading(false);
                 setFile(undefined);
                 return;
@@ -32,20 +47,19 @@ export const UploadImage: React.FC = () => {
         e.preventDefault();
         if (!file) {
             return;
-
         }
         // show toast when file exceeds 5MB
-        if (file.size > 5 * 1024 * 1024) {
+        if (checkFileSize(file)) {
             toast.info('El archivo no debe exceder los 5MB', {
                 position: 'top-center',
                 icon: '🎃'
             });
             setLoading(false);
             return;
-
         }
+
         // show toast when no file extension is jpg, jpeg or png
-        if (!allowedExtensions.includes(file.type)) {
+        if (checkExtensions(file)) {
             toast.info('El archivo debe ser .jpg, .jpeg o .png', {
                 position: 'top-center',
                 icon: '🎃'
