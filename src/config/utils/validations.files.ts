@@ -5,5 +5,5 @@ export const checkExtensions = (file: File) => {
 }
 
 export const checkFileSize = (file: File) => {
-    return file.size > 10 * 1024 * 1024;
+    return file.size > 5 * 1024 * 1024;
 }

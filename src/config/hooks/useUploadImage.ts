@@ -17,7 +17,7 @@ export const useUploadImage = () => {
                 if (checkExtensions(files[0])) {
                     sendInfoToast('El archivo debe ser .jpg, .jpeg o .png', '🎃');
                 } else {
-                    sendInfoToast('El archivo no debe exceder los 10MB', '🎃');
+                    sendInfoToast('El archivo no debe exceder los 5MB', '🎃');
                 }
                 setLoading(false);
                 setFile(undefined);
@@ -33,9 +33,9 @@ export const useUploadImage = () => {
         if (!file) {
             return;
         }
-        // show toast when file exceeds 10MB
+        // show toast when file exceeds 5MB
         if (checkFileSize(file)) {
-            sendInfoToast('El archivo no debe exceder los 10MB', '🎃');
+            sendInfoToast('El archivo no debe exceder los 5MB', '🎃');
             setLoading(false);
             return;
         }
