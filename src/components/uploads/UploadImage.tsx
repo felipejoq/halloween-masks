@@ -24,7 +24,7 @@ export const UploadImage: React.FC = () => {
         }
 
         // show toast when file exceeds 2MB
-        if (file.size > 2 * 1024 * 1024) {
+        if (file.size > 5 * 1024 * 1024) {
             toast.info('El archivo no debe exceder los 2MB', {
                 position: 'top-center',
                 icon: '🎃'
@@ -98,7 +98,7 @@ export const UploadImage: React.FC = () => {
                             className='text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100'
                         />
                         <label htmlFor='file'>
-                            Solo archivos .jpg, jpeg y png de máximo 2MB.
+                            Solo archivos .jpg, jpeg y png de máximo 5MB.
                         </label>
                         <label htmlFor='change_bg'
                                className='text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-center gap-2'>
