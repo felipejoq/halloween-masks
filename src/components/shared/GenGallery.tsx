@@ -1,7 +1,7 @@
 import { ImageWithLoading } from "./ImageWithLoading.tsx";
 import React, { useState } from "react";
 import { downloadImage } from "@config/utils.ts";
-import {toast, Toaster} from "sonner";
+import {toast} from "sonner";
 import ImageLoadError from "@media/load-error.webp";
 
 export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> = ({ faceMasks, aspectRatio }) => {
@@ -79,7 +79,6 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                     </button>
                 </div>
             )}
-            <Toaster />
         </>
     );
 };
