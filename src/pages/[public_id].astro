@@ -1,11 +1,12 @@
 ---
-import MainLayouts from "../layouts/MainLayouts.astro";
-import GoHome from "../components/shared/GoHome.astro";
-import {actions} from "astro:actions";
-import SocialShareButtons from "../components/shared/SocialShareButtons.astro";
-import Brand from "../components/shared/Brand.astro";
-import {GenGallery} from "../components/shared/GenGallery";
 import {getImage} from "astro:assets";
+import {actions} from "astro:actions";
+
+import MainLayouts from "@layouts/MainLayouts.astro";
+import GoHome from "@components/shared/GoHome.astro";
+import SocialShareButtons from "@components/shared/SocialShareButtons.astro";
+import Brand from "@components/shared/Brand.astro";
+import {GenGallery} from "@components/shared/GenGallery";
 
 const {public_id = ''} = Astro.params;
 
@@ -24,6 +25,7 @@ const originalImage = await getImage({
     format: 'webp',
     inferSize: true,
 });
+
 const aspectRatio = `${originalImage?.options.width} / ${originalImage?.options.height}`;
 // random del 0 al 4
 const random = Math.floor(Math.random() * 5);
@@ -54,7 +56,6 @@ const random = Math.floor(Math.random() * 5);
                                     class="w-full sm:max-w-[500px] rounded-lg shadow-lg"
                             />
                         </div>
-
                         <div class="w-full xl:w-1/2">
                             <h2 class='my-3 text-2xl text-white'>
                                 😱 Así te verías 😧
@@ -64,10 +65,6 @@ const random = Math.floor(Math.random() * 5);
                     </div>
         )
     }
-    {/* Info: limitado a 1 imagen por cuota gratuita
-    <div class="w-full text-gray-400 text-center my-4">
-        <p>👻 Limitado a dos resultados para optimizar recursos de generación de imágenes.</p>
-    </div>*/}
     <div class="flex justify-center">
         <GoHome/>
     </div>
