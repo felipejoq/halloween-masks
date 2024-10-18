@@ -1,119 +1,30 @@
-import React, {type ChangeEvent, type FormEvent, useState} from "react";
-import {actions, isInputError} from "astro:actions";
-import {Loader} from "@components/shared/Loader.tsx";
-import {toast} from "sonner";
-import {masks} from "@config/utils.ts";
+import React from "react";
+import {Loader} from "@components/shared/Loader";
+import {masks} from "@config/utils/masks.array";
+import {allowedExtensions} from "@config/utils/validations.files.ts";
+import {useUploadImage} from "@config/hooks/useUploadImage.ts";
 
-const allowedExtensions = ['image/jpg', 'image/jpeg', 'image/png'];
-
-const checkExtensions = (file: File) => {
-    return !allowedExtensions.includes(file.type);
-}
-
-const checkFileSize = (file: File) => {
-    return file.size > 5 * 1024 * 1024;
-}
 
 export const UploadImage: React.FC = () => {
-    const [file, setFile] = useState<File>();
-    const [changeBg, setChangeBg] = useState<boolean>(false);
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-
-        if (files) {
-            if (checkFileSize(files[0]) || checkExtensions(files[0])) {
-                if (checkExtensions(files[0])) {
-                    toast.info('El archivo debe ser .jpg, .jpeg o .png', {
-                        position: 'top-center',
-                        icon: '🎃'
-                    });
-                } else {
-                    toast.info('El archivo no debe exceder los 5MB', {
-                        position: 'top-center',
-                        icon: '🎃'
-                    });
-                }
-                setLoading(false);
-                setFile(undefined);
-                return;
-            }
-            setFile(files[0]);
-        }
-
-    }
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!file) {
-            return;
-        }
-        // show toast when file exceeds 5MB
-        if (checkFileSize(file)) {
-            toast.info('El archivo no debe exceder los 5MB', {
-                position: 'top-center',
-                icon: '🎃'
-            });
-            setLoading(false);
-            return;
-        }
-
-        // show toast when no file extension is jpg, jpeg or png
-        if (checkExtensions(file)) {
-            toast.info('El archivo debe ser .jpg, .jpeg o .png', {
-                position: 'top-center',
-                icon: '🎃'
-            });
-            setLoading(false);
-            return;
-        }
-
-        setLoading(true);
-
-        // form data
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('change_bg', changeBg.toString());
-
-        // send to server
-        const {data, error} = await actions.uploadImages(formData);
-
-        if (data?.result) {
-            //await navigate(`/${data.result.public_id}`);
-            window.location.href = `/${data.result.public_id}`;
-            //setLoading(false);
-        } else if (isInputError(error)) {
-            setLoading(false);
-            const errorMessage = error.fields?.file?.join(', ') ?? 'Unknown error';
-            toast.info(`${errorMessage}`, {
-                position: 'top-center',
-                icon: '🎃'
-            });
-        } else {
-            setLoading(false);
-            toast.info('Ha ocurrido un error inesperado', {
-                position: 'top-center',
-                icon: '🎃'
-            });
-        }
-    }
-
-    const handleClickButton = () => {
-        if (!file) {
-            toast.info('Debes seleccionar una imagen', {
-                position: 'top-center',
-                icon: '🎃'
-            });
-        }
-    }
+    const {
+        file,
+        changeBg,
+        setChangeBg,
+        loading,
+        handleFile,
+        handleSubmit,
+        handleClickButton
+    } = useUploadImage();
 
     return (
         <div className='px-4'>
             {
                 loading ? (<Loader/>) : (
-                    <form onSubmit={handleSubmit}
-                          className="flex flex-col gap-5 items-center justify-center content-center w-full">
-
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-5 items-center w-full"
+                    >
                         <input
                             id='file'
                             type="file"
