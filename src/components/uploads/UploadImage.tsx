@@ -33,7 +33,7 @@ export const UploadImage: React.FC = () => {
                             className='text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100'
                         />
                         <label htmlFor='file'>
-                            Solo archivos .jpg, jpeg y png de máximo 10MB.
+                            Solo archivos .jpg, jpeg y png de máximo 5MB.
                         </label>
                         <label htmlFor='change_bg'
                                className='text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-center gap-2'>
