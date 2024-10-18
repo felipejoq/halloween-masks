@@ -13,7 +13,17 @@ export const UploadImage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
+
         if (files) {
+            if (!allowedExtensions.includes(files[0].type)) {
+                toast.info('El archivo debe ser .jpg, .jpeg o .png', {
+                    position: 'top-center',
+                    icon: '🎃'
+                });
+                setLoading(false);
+                setFile(undefined);
+                return;
+            }
             setFile(files[0]);
         }
 
