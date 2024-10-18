@@ -1,6 +1,6 @@
 import { ImageWithLoading } from "./ImageWithLoading.tsx";
 import React, { useState } from "react";
-import { downloadImage } from "@config/utils.ts";
+import { downloadImage } from "@config/utils/download.image.ts";
 import {toast} from "sonner";
 import ImageLoadError from "@media/load-error.webp";
 
