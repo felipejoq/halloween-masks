@@ -2,7 +2,7 @@ import {defineAction} from "astro:actions";
 import {z} from "astro:schema";
 import {BASE_URL, TOKEN_SECRET} from "astro:env/server";
 import axios from "axios";
-import type {ResponseUpload} from "../../components/uploads/ResponseUpload.ts";
+import type {ResponseUpload} from "@components/uploads/ResponseUpload.ts";
 
 const extensionSupported = (file: File) => {
     const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
@@ -13,8 +13,8 @@ export const uploadImages = defineAction({
     accept: 'form',
     input: z.object({
         file: z.instanceof(File)
-            .refine((file) => file.size < 2 * 1024 * 1024, {
-                message: 'La imagen debe pesar máximo 2MB',
+            .refine((file) => file.size < 5 * 1024 * 1024, {
+                message: 'La imagen debe pesar máximo 5MB',
             })
             .refine(extensionSupported, {
                 message: 'Las extensiones permitidas son: png, jpg, jpeg',
