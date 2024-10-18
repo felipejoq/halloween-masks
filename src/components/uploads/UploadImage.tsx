@@ -1,8 +1,8 @@
 import React, {type ChangeEvent, type FormEvent, useState} from "react";
 import {actions, isInputError} from "astro:actions";
 import {Loader} from "@components/shared/Loader.tsx";
-import {Toaster, toast} from "sonner";
-import {type Mask, masks} from "@config/utils.ts";
+import {toast} from "sonner";
+import {masks} from "@config/utils.ts";
 
 export const UploadImage: React.FC = () => {
 
@@ -164,7 +164,6 @@ export const UploadImage: React.FC = () => {
                     </div>
                 )
             }
-            <Toaster/>
         </div>
     )
 }

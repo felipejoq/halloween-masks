@@ -4,6 +4,7 @@ import Footer from '@components/shared/Footer.astro';
 import {SITE_SOCIAL_IMAGE, SITE_TITLE, SITE_DESCRIPTION} from '@config/globla.config'
 import ImageFooter from "@components/shared/ImageFooter.astro";
 import ImageHeader from "@components/shared/ImageHeader.astro";
+import {Toaster} from "sonner";
 interface Props {
     title?: string;
     description?: string;
@@ -37,5 +38,6 @@ const {
     <Footer/>
 </div>
 <ImageFooter/>
+<Toaster client:only="react" />
 </body>
 </html>
