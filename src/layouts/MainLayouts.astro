@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import Footer from '@components/shared/Footer.astro';
 import {SITE_SOCIAL_IMAGE, SITE_TITLE, SITE_DESCRIPTION} from '@config/globla.config'
 import ImageFooter from "@components/shared/ImageFooter.astro";
@@ -29,7 +28,6 @@ const {
     <meta property="og:description" content={description}/>
     <meta property="og:image" content={social_image}/>
     <title>{title}</title>
-    <ViewTransitions />
 </head>
 <body class="bg-gradient-to-b from-[#242424] to-black-500 text-orange-500 flex flex-col items-center justify-center content-center gap-3">
 <ImageHeader/>
