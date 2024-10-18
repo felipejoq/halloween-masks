@@ -1,31 +1,56 @@
 import React, {type ChangeEvent, type FormEvent, useState} from "react";
 import {actions, isInputError} from "astro:actions";
-import {Loader} from "../shared/Loader.tsx";
-import {Toaster, toast} from "sonner";
-import {navigate} from "astro:transitions/client";
+import {Loader} from "@components/shared/Loader.tsx";
+import {toast} from "sonner";
+import {masks} from "@config/utils.ts";
+
+const allowedExtensions = ['image/jpg', 'image/jpeg', 'image/png'];
+
+const checkExtensions = (file: File) => {
+    return !allowedExtensions.includes(file.type);
+}
+
+const checkFileSize = (file: File) => {
+    return file.size > 5 * 1024 * 1024;
+}
 
 export const UploadImage: React.FC = () => {
-
     const [file, setFile] = useState<File>();
     const [changeBg, setChangeBg] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
 
+    const [loading, setLoading] = useState<boolean>(false);
     const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
+
         if (files) {
+            if (checkFileSize(files[0]) || checkExtensions(files[0])) {
+                if (checkExtensions(files[0])) {
+                    toast.info('El archivo debe ser .jpg, .jpeg o .png', {
+                        position: 'top-center',
+                        icon: '🎃'
+                    });
+                } else {
+                    toast.info('El archivo no debe exceder los 5MB', {
+                        position: 'top-center',
+                        icon: '🎃'
+                    });
+                }
+                setLoading(false);
+                setFile(undefined);
+                return;
+            }
             setFile(files[0]);
         }
-    }
 
+    }
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!file) {
             return;
         }
-
-        // show toast when file exceeds 2MB
-        if (file.size > 2 * 1024 * 1024) {
-            toast.info('El archivo no debe exceder los 2MB', {
+        // show toast when file exceeds 5MB
+        if (checkFileSize(file)) {
+            toast.info('El archivo no debe exceder los 5MB', {
                 position: 'top-center',
                 icon: '🎃'
             });
@@ -34,8 +59,7 @@ export const UploadImage: React.FC = () => {
         }
 
         // show toast when no file extension is jpg, jpeg or png
-        const allowedExtensions = ['image/jpg', 'image/jpeg', 'image/png'];
-        if (!allowedExtensions.includes(file.type)) {
+        if (checkExtensions(file)) {
             toast.info('El archivo debe ser .jpg, .jpeg o .png', {
                 position: 'top-center',
                 icon: '🎃'
@@ -55,9 +79,9 @@ export const UploadImage: React.FC = () => {
         const {data, error} = await actions.uploadImages(formData);
 
         if (data?.result) {
-            setLoading(false);
-            await navigate(`/${data.result.public_id}`);
-            // window.location.href = `/${data.result.public_id}`;
+            //await navigate(`/${data.result.public_id}`);
+            window.location.href = `/${data.result.public_id}`;
+            //setLoading(false);
         } else if (isInputError(error)) {
             setLoading(false);
             const errorMessage = error.fields?.file?.join(', ') ?? 'Unknown error';
@@ -98,13 +122,14 @@ export const UploadImage: React.FC = () => {
                             className='text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100'
                         />
                         <label htmlFor='file'>
-                            Solo archivos .jpg, jpeg y png de máximo 2MB.
+                            Solo archivos .jpg, jpeg y png de máximo 5MB.
                         </label>
                         <label htmlFor='change_bg'
                                className='text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-center gap-2'>
                             <div className='flex gap-5 text-orange-500 font-semibold text-2xl'>
-                                Marca para agregar un fondo "Terrorífico"</div>
-                                <span className='hidden sm:block text-[30px]'>😏👉</span>
+                                Marca para agregar un fondo "Terrorífico"
+                            </div>
+                            <span className='hidden sm:block text-[30px]'>😏👉</span>
                             <div className='flex justify-center'>
                                 <input
                                     checked={changeBg}
@@ -117,6 +142,30 @@ export const UploadImage: React.FC = () => {
                             </div>
                         </label>
 
+                        <div className='flex flex-col items-center justify-center gap-4 mb-4'>
+                            <div className='flex justify-center'>
+                                {
+                                    masks.map((mask, index) => (
+                                        <label htmlFor='masks' key={index} className='flex gap-2 text-orange-500'>
+                                            <input
+                                                type='checkbox'
+                                                name='masks'
+                                                hidden={true}
+                                                id={mask.public_id}
+                                                value={mask.public_id}
+                                                className='mr-2 text-orange-500 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 focus:ring-2'
+                                            />
+                                            <img
+                                                src={mask.src}
+                                                alt={mask.public_id}
+                                                className='w-20 max-h-20 cursor-pointer object-contain'
+                                            />
+                                        </label>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
                         <button
                             onClick={handleClickButton}
                             className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded"
@@ -128,7 +177,7 @@ export const UploadImage: React.FC = () => {
                 )
             }
             {
-                file && (
+                file && allowedExtensions.includes(file.type) && (
                     <div className='flex flex-col items-center justify-center'>
                         <h2 className='my-3 text-3xl'>📸 Tu foto</h2>
                         <img
@@ -139,7 +188,6 @@ export const UploadImage: React.FC = () => {
                     </div>
                 )
             }
-            <Toaster/>
         </div>
     )
 }
