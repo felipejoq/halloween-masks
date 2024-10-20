@@ -22,23 +22,21 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
 
     const handleDownload = async (e: React.MouseEvent, src: string) => {
         e.stopPropagation();
-        setIsDownloading(true);
         //await downloadImage(src);
-        toast.promise(downloadImage(src), {
+        toast.promise(downloadImage(src, setIsDownloading), {
             loading: "Descargando imagen tenebrosa... 👻",
             success: "Descarga exitosa! 🎃",
             error: "Error al descargar la imagen ❌",
             position: "top-right",
         })
-        setIsDownloading(false);
     };
 
     return (
         <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {faceMasks.map((face: string, index: number) => (
                     <div onClick={() => handleClick(face)} key={index}>
-                        <ImageWithLoading src={face} aspectRatio={aspectRatio} />
+                        <ImageWithLoading src={face} aspectRatio={aspectRatio}/>
                     </div>
                 ))}
             </div>
@@ -62,12 +60,12 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                             className="mt-4 flex justify-center gap-3 text-sm text-orange-300 bg-white hover:bg-orange-400 hover:text-white font-bold py-2 px-4 rounded"
                             title="Download image"
                         >
-                                {isDownloading ? (
-                                    <span className="animate-spin-slow">⏳</span>
-                                ) : (
-                                    <span className='cursor-pointer'>⬇</span>
-                                )}
-                                ️Descargar
+                            {isDownloading ? (
+                                <span className="animate-spin-slow">⏳</span>
+                            ) : (
+                                <span className='cursor-pointer'>⬇</span>
+                            )}
+                            ️Descargar
                         </button>
                     </div>
                     {/* Close button */}

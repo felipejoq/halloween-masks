@@ -7,6 +7,7 @@ import GoHome from "@components/shared/GoHome.astro";
 import SocialShareButtons from "@components/shared/SocialShareButtons.astro";
 import Brand from "@components/shared/Brand.astro";
 import {GenGallery} from "@components/shared/GenGallery";
+import React from "react";
 
 const {public_id = ''} = Astro.params;
 
@@ -65,7 +66,7 @@ const random = Math.floor(Math.random() * 5);
                     </div>
         )
     }
-    <div class="w-full text-center opacity-90 text-orange-400 text-sm my-3">
+    <div class="w-full text-center text-orange-400 text-sm my-3">
         <strong>👻 Demo Info:</strong> Limitado a 2 de 5 resultados posibles con máscaras aleatorias.
     </div>
     <div class="flex justify-center">

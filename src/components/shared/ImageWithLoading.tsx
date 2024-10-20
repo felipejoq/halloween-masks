@@ -23,14 +23,12 @@ export const ImageWithLoading: React.FC<{ src: string; aspectRatio: string }> = 
 
     const handleDownload = async (e: React.MouseEvent, src: string) => {
         e.stopPropagation();
-        setIsDownloading(true);
-        toast.promise(downloadImage(src), {
+        toast.promise(downloadImage(src, setIsDownloading), {
             loading: "Descargando imagen tenebrosa... 👻",
             success: "Descarga exitosa! 🎃",
             error: "Error al descargar la imagen ❌",
             position: "top-right",
         })
-        setIsDownloading(false);
     };
 
     return (

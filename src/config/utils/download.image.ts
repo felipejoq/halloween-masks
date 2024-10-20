@@ -1,5 +1,11 @@
-export const downloadImage = async (src: string) => {
+import React from "react";
+
+export const downloadImage = async (
+    src: string,
+    setIsDownloading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
     // Extract filename and extension from URL
+    setIsDownloading(true);
     const url = new URL(src);
     const pathname = url.pathname;
     const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
@@ -14,5 +20,6 @@ export const downloadImage = async (src: string) => {
             document.body.appendChild(link);
             link.click();
             link.parentNode?.removeChild(link);
+            setIsDownloading(false);
         });
 }
