@@ -1,7 +1,7 @@
 import { ImageWithLoading } from "./ImageWithLoading.tsx";
 import React, { useState } from "react";
 import { downloadImage } from "@config/utils/download.image.ts";
-import {toast} from "sonner";
+import { toast } from "sonner";
 import ImageLoadError from "@media/load-error.webp";
 
 export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> = ({ faceMasks, aspectRatio }) => {
@@ -22,13 +22,12 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
 
     const handleDownload = async (e: React.MouseEvent, src: string) => {
         e.stopPropagation();
-        //await downloadImage(src);
         toast.promise(downloadImage(src, setIsDownloading), {
             loading: "Descargando imagen tenebrosa... 👻",
             success: "Descarga exitosa! 🎃",
             error: "Error al descargar la imagen ❌",
             position: "top-right",
-        })
+        });
     };
 
     return (
@@ -36,7 +35,7 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
             <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {faceMasks.map((face: string, index: number) => (
                     <div onClick={() => handleClick(face)} key={index}>
-                        <ImageWithLoading src={face} aspectRatio={aspectRatio}/>
+                        <ImageWithLoading src={face} aspectRatio={aspectRatio} />
                     </div>
                 ))}
             </div>
@@ -49,7 +48,7 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                         <img
                             src={selectedImage}
                             alt="Halloween masks resultado"
-                            className="w-full max-w-lg h-auto object-contain rounded-lg shadow-lg"
+                            className="w-full max-w-lg max-h-[80vh] h-auto object-contain rounded-lg shadow-lg"
                             onError={(e) => {
                                 (e.target as HTMLImageElement).src = ImageLoadError.src;
                             }}
@@ -63,7 +62,7 @@ export const GenGallery: React.FC<{ faceMasks: string[]; aspectRatio: string }> 
                             {isDownloading ? (
                                 <span className="animate-spin-slow">⏳</span>
                             ) : (
-                                <span className='cursor-pointer'>⬇</span>
+                                <span className="cursor-pointer">⬇</span>
                             )}
                             ️Descargar
                         </button>
