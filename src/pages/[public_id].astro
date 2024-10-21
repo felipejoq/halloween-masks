@@ -31,11 +31,12 @@ const aspectRatio = `${originalImage?.options.width} / ${originalImage?.options.
 
 // get random value from face_masks variable length
 const random = Math.floor(Math.random() * (result?.face_masks.length ?? 0));
+const socialImage = result?.face_masks[random] ?? '';
 ---
 <MainLayouts
         title="¿Qué tal me quedan las máscaras? 🎃 - boooooo"
         description="Si te asustas, no te preocupes, es solo una broma de Halloween 😛"
-        social_image={result?.face_masks[random] ?? ''}
+        social_image={socialImage}
 >
     <Brand/>
     <SocialShareButtons/>
@@ -67,9 +68,6 @@ const random = Math.floor(Math.random() * (result?.face_masks.length ?? 0));
                     </div>
         )
     }
-    <div class="w-full text-center text-orange-400 text-sm my-3">
-        <strong>👻 Demo Info:</strong> Limitado a 2 de 5 resultados posibles con máscaras aleatorias.
-    </div>
     <div class="flex justify-center">
         <GoHome/>
     </div>
