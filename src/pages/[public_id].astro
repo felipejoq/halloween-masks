@@ -28,8 +28,9 @@ const originalImage = await getImage({
 });
 
 const aspectRatio = `${originalImage?.options.width} / ${originalImage?.options.height}`;
-// random del 0 al 4
-const random = Math.floor(Math.random() * 5);
+
+// get random value from face_masks variable length
+const random = Math.floor(Math.random() * (result?.face_masks.length ?? 0));
 ---
 <MainLayouts
         title="¿Qué tal me quedan las máscaras? 🎃 - boooooo"
