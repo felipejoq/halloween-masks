@@ -1,12 +1,19 @@
 ---
+import {Image} from 'astro:assets'
 import MainLayouts from "@layouts/MainLayouts.astro";
+import notFoundImage from "@media/404.webp";
 ---
 
 <MainLayouts>
     <div class="h-screen flex flex-col items-center justify-center content-center gap-5">
-        <h1 class="text-4xl font-bold text-white">404 - Not found</h1>
-        <p class="prose text-orange-500 text-2xl">La imagen que estás intentando buscar no se encuentra o no existe</p>
-        <a href="/" class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded">
+        <Image
+                src={notFoundImage}
+                width={200}
+                alt="404 Not Found"
+        />
+        <h1 class="text-3xl font-bold text-white">404 - Not found</h1>
+        <p class="prose text-orange-500 text-xl">La imagen que estás intentando buscar no se encuentra o no existe</p>
+        <a href="/" class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded my-4">
             🏠 Volver a inicio
         </a>
     </div>
