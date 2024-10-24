@@ -7,6 +7,16 @@ import Brand from "@components/shared/Brand.astro";
 <MainLayouts>
     <div class="text-center flex flex-col items-center content-center justify-center gap-4 mt-20">
         <Brand />
+        {/* Message this app was desactivate */}
+        <div
+                id="disabled-message"
+                class="bg-red-500 text-white p-4 rounded-lg text-center prose mx-auto prose-a:text-white"
+        >
+            <p>
+                <span class="font-bold text-white">🎃 ¡Atención!</span> Esta aplicación ha sido desactivada por el momento y rondan fantasmas por aquí.
+                Los ganadores de la hackathon se pueden ver en el canal de <a href="https://discord.gg/midudev">Discord</a> de Midudev.
+            </p>
+        </div>
         <h1 class="text-4xl prose text-white font-bold">¡Pruébate una máscara!</h1>
         <p class="text-orange-300 text-2xl text-center prose">
             Sube una foto donde salga tu rostro y prueba cómo te ves con la colección de máscaras 2024.

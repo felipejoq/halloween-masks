@@ -72,9 +72,11 @@ export const useUploadImage = () => {
     }
 
     const handleClickButton = () => {
-        if (!file) {
+        sendInfoToast('¡Esta web ha sido desactivada por los espíritus!', '😱');
+        return;
+        /*if (!file) {
             sendInfoToast('Debes seleccionar una imagen', '🎃');
-        }
+        }*/
     }
 
     return {
